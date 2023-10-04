@@ -11,7 +11,6 @@ import { getAuth,signOut } from 'firebase/auth';
 function Header() {
   const navigate = useNavigate()
   const {user} = useContext(AuthContext)
-  console.log(user)
   const auth = getAuth();
   return (
     <div className="headerParentDiv">
@@ -40,16 +39,16 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span>{user?user.displayName:'Login'}</span>
+          <span onClick={user?null:()=>navigate('/login')}>{user?user.displayName:'Login'}</span>
           <hr />
         </div>
-        {user && <span onClick={()=>
+        {user && <span className='logout' onClick={()=>
         { signOut(auth);navigate('/login') }
         }>logout</span>}
 
         <div className="sellMenu">
           <SellButton></SellButton>
-          <div className="sellMenuContent">
+          <div onClick={()=>navigate('/create')} className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
             <span>SELL</span>
           </div>

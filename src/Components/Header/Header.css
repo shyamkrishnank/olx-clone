@@ -2,7 +2,7 @@
   padding: 10px;
   background-color: whitesmoke;
   position: fixed;
-  width: 100vw;
+  width: 98%;
   z-index: 999;
 }
 
@@ -109,11 +109,18 @@
 .loginPage hr {
   margin: 0;
   background-color: black;
-  height: 2px;
+  height: 0px;
+}
+.loginPage{
+  cursor: pointer;
 }
 
 .loginPage a{
   text-decoration: none;
+
+}
+.logout{
+  cursor: pointer;
 }
 
 .sellMenu {

@@ -40,8 +40,10 @@ function Posts() {
           return <div
             className="card"
             onClick={()=>{setPostDetails(product);navigate('/view')}
+  
       
           }
+          key={product.id}
           >
             <div className="favorite">
               <Heart></Heart>

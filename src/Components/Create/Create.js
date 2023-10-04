@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import {storage,firestore} from '../../firebase/config'
 import {AuthContext} from '../../store/Context'
 import { addDoc, collection } from 'firebase/firestore';
+import Swal from 'sweetalert2';
 const Create = () => {
   const navigate = useNavigate()
   const {user} = useContext(AuthContext)
@@ -31,14 +32,13 @@ const Create = () => {
               });
               navigate('/')
             } catch (error) {
-              console.error('Error adding document: ', error);
-              alert('Error adding document: ' + error.message);
+              Swal.fire('Sorry!Please login to add products..')
             }
 
             
           })
           .catch((error)=>{
-            alert(error.message)
+            Swal.fire(error.message)
           })
         })
   }
@@ -56,7 +56,6 @@ const Create = () => {
               value={name}
               onChange={e=>setName(e.target.value)}
               name="Name"
-              defaultValue="John"
             />
             <br />
             <label htmlFor="fname">Category</label>
@@ -68,7 +67,6 @@ const Create = () => {
               value={category}
               onChange={e=>setCategory(e.target.value)}
               name="category"
-              defaultValue="John"
             />
             <br />
             <label htmlFor="fname">Price</label>
@@ -77,7 +75,7 @@ const Create = () => {
             <br />
        
           <br />
-          <img src={image?URL.createObjectURL(image):null} alt="Posts" width="200px" height="200px" ></img>
+          <img src={image?URL.createObjectURL(image):null} alt="image" width="200px" height="200px" ></img>
             <br />
             <input onChange={e=>setImage(e.target.files[0])} type="file" />
             <br />

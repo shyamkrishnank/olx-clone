@@ -3,16 +3,15 @@ import { useState,useContext } from 'react';
 import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { collection, addDoc, getFirestore } from 'firebase/firestore';
-import { FirebaseContext } from '../../store/Context';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 export default function Signup() {
   const navigate = useNavigate()
    const [username,setUsername] = useState('');
    const [email,setEmail] = useState('');
    const [phone,setPhone] = useState('');
    const [password,setPassword] = useState('');
-   const {firebase} = useContext(FirebaseContext)
    const handleSubmit =(e) =>{
     e.preventDefault()
     const auth = getAuth();
@@ -32,6 +31,11 @@ export default function Signup() {
             navigate("/login");
           })
         })
+    }
+    )
+    .catch(reson=>{
+      // alert(reson)
+      Swal.fire(reson.message)
     })
    }
 
@@ -47,7 +51,6 @@ export default function Signup() {
             type="text"
             value={username}
             onChange={e=>setUsername(e.target.value)}
-            id="fname"
             name="name"
             defaultValue="John"
           />
@@ -57,7 +60,6 @@ export default function Signup() {
           <input
             className="input"
             type="email"
-            id="fname"
             value={email}
             onChange={e=>setEmail(e.target.value)}
             name="email"
@@ -69,7 +71,6 @@ export default function Signup() {
           <input
             className="input"
             type="number"
-            id="lname"
             value={phone}
             onChange={e=>setPhone(e.target.value)}
             name="phone"
@@ -81,7 +82,6 @@ export default function Signup() {
           <input
             className="input"
             type="password"
-            id="lname"
             value={password}
             onChange={e=>setPassword(e.target.value)}
             name="password"
@@ -91,7 +91,7 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={()=>navigate('/login')}>Login</a>
       </div>
     </div>
   );

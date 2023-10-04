@@ -6,7 +6,7 @@ import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 import Create from './Pages/Create'
 import View from './Pages/ViewPost'
-import { AuthContext, FirebaseContext } from './store/Context';
+import { AuthContext } from './store/Context';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Post from './store/PostContext';
 function App() {

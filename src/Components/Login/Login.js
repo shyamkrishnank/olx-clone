@@ -3,20 +3,19 @@ import {FirebaseContext} from  '../../store/Context'
 import Logo from '../../olx-logo.png';
 import './Login.css';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 function Login() {
   const navigate = useNavigate()
   const [email,setEmail] = useState('')
-  const {firebase} = useContext(FirebaseContext)
   const [password,setPassword] = useState('')
   const handleLogin = e =>{
     e.preventDefault()
     const auth = getAuth();
     signInWithEmailAndPassword(auth,email,password).then(()=>{
-      alert('Logged In')
       navigate('/')
     }).catch((error)=>{
-      alert(error.message)
+      Swal.fire(error.message)
     })
 
   }
@@ -52,7 +51,7 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <a onClick={()=>navigate('/signup')}> Signup</a>
       </div>
     </div>
   );
